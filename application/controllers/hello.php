@@ -1,5 +1,5 @@
 <?php
-class HelloClass extends CI_Controller {
+class hello extends CI_Controller {
 
     public function sayHello($page = 'home')
     {
