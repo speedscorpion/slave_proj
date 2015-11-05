@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> 'mysql:host=localhost;dbname=slave',
-	'username' => 'root',
+	'username' => 'developer',
 	'database' => 'slave',
-	'password' => '',
+	'password' => 'scorpion',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
