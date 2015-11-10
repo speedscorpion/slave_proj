@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=slave',
+	'hostname' => '120.24.69.137',
 	'username' => 'developer',
 	'database' => 'slave',
 	'password' => 'scorpion',
