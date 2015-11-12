@@ -80,36 +80,50 @@ class Slave  extends CI_Controller {
         $id = get_cookie("slave_game_user_id");
     	$result = $this->release($enemy);
         if($result != []){
-            $ids = [];
-            foreach ($result as $item) {
-                $data = ['owner_id'=>$id, 'slave_id'=>$item->slave_id];
-                $this->db->insert('slave', $data);
-                $ids[] = $item->id;
-            }
-            $this->db->where_in('id', $ids);
-            $this->db->update('slave', ['state'=>3]);
+            foreach ($this->get_slaves($result) as $item) 
+                $this->db->insert('slave', ['owner_id'=>$id, 'slave_id'=>$item]);
+
+            $this->db->where_in('id', $this->get_slaves($result));
+            $this->db->update('user', ['state'=>3]);
+
+            $this->db->where_in('id', $this->get_slave_relation($result));
+            $this->db->update('slave', ['state'=>2]);
         }
         
     	$slave_num = add_slave($subject, sizeof($result));
         $this->load->view('owner/palace', []);
     }
 
+
+    private function get_slave_relation($result){
+        $ids = [];
+        foreach ($result as $item) 
+            $ids[] = $item->id;
+        return $ids;
+    }
+
+
+    private function get_slaves($result){
+        $slaves = [];
+        foreach ($result as $item)
+            $slaves[] = $item->slave_id;
+        return $slaves;
+    }
+
     private function release($enemy){
         $query = $this->db->query('select id, slave_id from slave where state = 1 and owner_id = \''.$enemy. '\';');
-        $result = $query->result();
-        return $result;
+        return $query->result();
     }
 
     public function free($enemy){
     	$subject = get_cookie("slave_game_user_id");
         $result = $this->release($enemy);
         if($result != []){
-            $ids = [];
-            foreach ($result as $item){
-                $ids[] = $item->id;
-            }
-            $this->db->where_in('id', $ids);
-            $this->db->update('slave', ['state'=>1]);
+            $this->db->where_in('id', $this->get_slave_relation($result));
+            $this->db->update('slave',['state'=>2]);
+
+            $this->db->where_in('id', $this->get_slaves($result));
+            $this->db->update('user', ['state'=>1]);
         }
         
     	$this->load->view('owner/palace', []);
@@ -140,14 +154,16 @@ class Slave  extends CI_Controller {
             $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
             if($holder->fighter + 1 > floor($sum/2)){
                 $result = $this->release($owner);
-                $ids = [];
-                foreach ($result as $item){
-                    $ids[] = $item->id;
-                }
-                $this->db->where_in('id', $ids);
-                $this->db->update('slave', ['state'=>1]);
+                
+                $this->db->where_in('id', $this->get_slaves($result));
+                $this->db->update('user', ['state'=>1]);
+
+                $this->db->where_in('id', $this->get_slave_relation($result));
+                $this->db->update('slave', ['state'=>2]);
+
                 $this->db->where('flag', $holder->flag);
                 $this->db->update('threat', ['state'=>2]);
+                
                 $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
