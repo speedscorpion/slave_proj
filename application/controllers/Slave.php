@@ -49,6 +49,7 @@ class Slave  extends CI_Controller {
         $this->db->where('id', $object);
         $this->db->update('user', $data);
 
+        $this->db->insert('slave', ['owner_id'=>$object, 'slave_id'=>$subject]);
     }
 
 	public function capture($enemy)
@@ -78,10 +79,17 @@ class Slave  extends CI_Controller {
     public function tansfer($enemy){
         $id = get_cookie("slave_game_user_id");
     	$result = $this->release($enemy);
-    	foreach ($result as $item) {
-            $data = ['owner_id'=>$id, 'slave_id'=>$item->slave_id];
-    		$this->db->insert('slave', $data);
-    	}
+        if($result != []){
+            $ids = [];
+            foreach ($result as $item) {
+                $data = ['owner_id'=>$id, 'slave_id'=>$item->slave_id];
+                $this->db->insert('slave', $data);
+                $ids[] = $item->id;
+            }
+            $this->db->where_in('id', $ids);
+            $this->db->update('slave', ['state'=>3]);
+        }
+        
     	$slave_num = add_slave($subject, sizeof($result));
         $this->load->view('owner/palace', []);
     }
@@ -89,18 +97,21 @@ class Slave  extends CI_Controller {
     private function release($enemy){
         $query = $this->db->query('select id, slave_id from slave where state = 1 and owner_id = \''.$enemy. '\';');
         $result = $query->result_array();
-        $ids = [];
-        foreach ($result as $item){
-            $ids[] = $item->id;
-        }
-        $this->db->where_in('id', $ids);
-        $this->db->update('slave', ['state'=>2]);
         return $reuslt;
     }
 
     public function free($enemy){
     	$subject = get_cookie("slave_game_user_id");
-        $this->release($enemy);
+        $result = $this->release($enemy);
+        if($result != []){
+            $ids = [];
+            foreach ($result as $item){
+                $ids[] = $item->id;
+            }
+            $this->db->where_in('id', $ids);
+            $this->db->update('slave', ['state'=>2]);
+        }
+        
     	$this->load->view('owner/palace', []);
     }
 
