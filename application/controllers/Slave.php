@@ -48,6 +48,7 @@ class Slave  extends CI_Controller {
         $data->asset = $data->asset + 1;
         $this->db->where('id', $object);
         $this->db->update('user', $data);
+
     }
 
 	public function capture($enemy)
@@ -104,6 +105,10 @@ class Slave  extends CI_Controller {
     }
 
 
+    public function victory(){
+        $this->load->view('slave/fire', []);
+    }
+
 	public function raise(){
 		$id = get_cookie("slave_game_user_id");
 		$owner = $this->db->query('select owner_id form slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
@@ -122,7 +127,7 @@ class Slave  extends CI_Controller {
             if($holder->fighter > floor($sum/2)){
                 $this->release($holder->owner_id);
                 $this->be_slave($holder->owner_id, $holder->launcher);
-                $this->load->view('slave/fire', []);
+                echo "victory";
             }else{
                 $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
                 $this->db->where('flag', $holder->flag);
