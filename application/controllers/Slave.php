@@ -137,14 +137,12 @@ class Slave  extends CI_Controller {
             $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
             if($holder->fighter + 1 > floor($sum/2)){
                 $result = $this->release($owner);
-                if($result != []){
-                    $ids = [];
-                    foreach ($result as $item){
-                        $ids[] = $item->id;
-                    }
-                    $this->db->where_in('id', $ids);
-                    $this->db->update('slave', ['state'=>2]);
+                $ids = [];
+                foreach ($result as $item){
+                    $ids[] = $item->id;
                 }
+                $this->db->where_in('id', $ids);
+                $this->db->update('slave', ['state'=>2]);
                 $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
