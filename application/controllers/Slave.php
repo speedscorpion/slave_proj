@@ -76,7 +76,7 @@ class Slave  extends CI_Controller {
     	return $data->asset;
     }
 
-    public function tansfer($enemy){
+    public function transfer($enemy){
         $id = get_cookie("slave_game_user_id");
     	$result = $this->release($enemy);
         if($result != []){
@@ -163,7 +163,7 @@ class Slave  extends CI_Controller {
 
                 $this->db->where('flag', $holder->flag);
                 $this->db->update('threat', ['state'=>2]);
-                
+
                 $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
