@@ -54,7 +54,7 @@ class Hello  extends CI_Controller {
     {
         $subject = get_cookie("slave_game_user_id");
         if($subject == NULL)
-        	return 'invalid';
+        	echo 'invalid';
         $result = $this->judge_result($subject, $enemy);
         if($result){
             $this->be_slave($enemy, $subject);
@@ -65,7 +65,7 @@ class Hello  extends CI_Controller {
         }
     }
 
-	public function add_slave($id, $num){
+	private function add_slave($id, $num){
     	$data = $this->db->get_where('user', ['id'=>$id ])->row();
         if($data->state == 1)
             $data->state = 2;
