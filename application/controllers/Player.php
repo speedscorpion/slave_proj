@@ -78,6 +78,6 @@ class Player extends CI_Controller {
                 'asset' => 0
             );
         $this->db->insert('user', $data);
-        return data;
+        return $data;
     }
 }
