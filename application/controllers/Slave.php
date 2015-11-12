@@ -82,7 +82,8 @@ class Slave  extends CI_Controller {
         if($result != []){
             foreach ($this->get_slaves($result) as $item) 
                 $this->db->insert('slave', ['owner_id'=>$id, 'slave_id'=>$item]);
-
+            $slave_num = $this->add_slave($subject, sizeof($result));
+            
             $this->db->where_in('id', $this->get_slaves($result));
             $this->db->update('user', ['state'=>3]);
 
@@ -90,7 +91,6 @@ class Slave  extends CI_Controller {
             $this->db->update('slave', ['state'=>2]);
         }
         
-    	$slave_num = add_slave($subject, sizeof($result));
         $this->load->view('owner/palace', []);
     }
 
