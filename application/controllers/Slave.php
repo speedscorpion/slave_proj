@@ -118,7 +118,7 @@ class Hello  extends CI_Controller {
 			echo "lead";
 		}else{
 			$holder = $query->row();
-            $sum = $this->db->get_where('user', ['id'->$owner])->row()->asset;
+            $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
             if($holder->fighter > floor($sum/2)){
                 $this->release($holder->owner_id);
                 $this->be_slave($holder->owner_id, $holder->launcher);
