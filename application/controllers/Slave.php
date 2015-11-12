@@ -1,5 +1,5 @@
 <?php
-class Hello  extends CI_Controller {
+class Slave  extends CI_Controller {
 
 
     private function uuid($trim = false) 
