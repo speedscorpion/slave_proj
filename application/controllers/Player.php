@@ -60,7 +60,7 @@ class Player extends CI_Controller {
         
     }
 
-    private create_player(){
+    private function create_player(){
         $id = $this->uuid();
             $cookie = array(
                 'name' => 'slave_game_user_id',
