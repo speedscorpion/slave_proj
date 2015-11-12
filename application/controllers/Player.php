@@ -29,7 +29,7 @@ class Player extends CI_Controller {
         
         $id = get_cookie("slave_game_user_id");
         if ($id == NULL) { // create new user
-            $data = create_player();
+            $data = $this->create_player();
         }else{
             // get user info and return
             $query = $this->db->get_where('user', array('id'=>$id));
