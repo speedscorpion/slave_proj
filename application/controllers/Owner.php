@@ -14,14 +14,15 @@ class Owner  extends CI_Controller {
 		$query = $this->db->get_where('user', ['id'=>$target]);
 		$state = $query->row()->state;
 		if($state == 3){
-			$this->db->query('update set state = 6 where id = \''. $target.'\';');
+			$this->db->query('update user set state = 6 where id = \''. $target.'\';');
 			return "success";
 		}else if($state == 4){
-			$this->db->query('update set state = 6 where id = \''. $target.'\';');
+			$this->db->query('update user set state = 6 where id = \''. $target.'\';');
 			break_up($id);
 			return "success";
 		}else{
-			$this->db->query('update set state = 7 where id = \''.$id.'\';');
+			$this->db->where('id', $id);
+			$this->db->update('user', ['state'=>7, 'cool'=>time()])
 			return "fail";
 		}
 	}
