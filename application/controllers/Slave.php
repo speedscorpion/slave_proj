@@ -123,7 +123,7 @@ class Slave  extends CI_Controller {
 	public function raise(){
 		$id = get_cookie("slave_game_user_id");
 		$owner = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
-		$query = $this->db->query('select flag, fighter from threat where state = 1 and owner_id = \''.$owner.'\';');
+		$query = $this->db->query('select flag, fighter, launcher from threat where state = 1 and owner_id = \''.$owner.'\';');
 		$result = $query->result();
 		if($result == NULL){
 			$uuid = $this->uuid();
@@ -136,8 +136,16 @@ class Slave  extends CI_Controller {
 			$holder = $query->row();
             $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
             if($holder->fighter + 1 > floor($sum/2)){
-                $this->release($holder->owner_id);
-                $this->be_slave($holder->owner_id, $holder->launcher);
+                $result = $this->release($owner);
+                if($result != []){
+                    $ids = [];
+                    foreach ($result as $item){
+                        $ids[] = $item->id;
+                    }
+                    $this->db->where_in('id', $ids);
+                    $this->db->update('slave', ['state'=>2]);
+                }
+                $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
                 $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
