@@ -49,7 +49,7 @@ class Player extends CI_Controller {
             case 3:
             case 4:
             case 5:
-                $this->load->view("slave/squre", []);
+                $this->load->view("slave/square", []);
                 break;
             case 6:
                 $this->load->view("slave/jail", []);
