@@ -32,7 +32,10 @@
 					url: "http://www.hereprovides.com/slave/index.php/User/nearby",
 					dataType: "json",
 					success: function(data){
-						alert(data);
+						for(var item in data){
+							var node = "<a href='" + item.id + "'>" + item.nickname + "</a>";
+							$("#holder").append(node);
+						}
 					}
 				});
 			});
