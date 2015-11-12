@@ -5,9 +5,9 @@ class User extends CI_Controller{
     public function nearby(){
     	$id = get_cookie("slave_game_user_id");
         $states = '(1, 2)';
-        $statement = 'select * from user where state in (1, 2) and id != \''. $id . '\'';
+        $statement = 'select * from user where state in (1, 2) and id != \''. $id.  '\';';
         $query = $this->db->query($statement);
-    	return json_encode($query->result_array());
+    	echo json_encode($query->result_array());
     }
 
     public function show(){
