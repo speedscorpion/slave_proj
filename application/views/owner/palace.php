@@ -33,7 +33,7 @@
 					dataType: "json",
 					success: function(data){
 						for(var item in data){
-							var node = "<a href='" + data[item].id + "'>" + data[item].nickname + "</a>" + "<br/>";
+							var node = "<a href='http://www.hereprovides.com/slave/index.php/Slave/capture/" + data[item].id + "'>" + data[item].nickname + "</a>" + "<br/>";
 							$("#holder").append(node);
 						}
 					}

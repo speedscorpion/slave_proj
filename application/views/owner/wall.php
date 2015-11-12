@@ -14,15 +14,15 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#accept").click(function(){
-				location.href="";
+				location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
 			});
 
 			$("#give_free").click(function(){
-
+				location.href=<?php echo "http://www.hereprovides.com/slave/index.php/Slave/free/".$enemy; ?>
 			});
-			
-			$("#my_slaves").click(function(){
 
+			$("#my_slaves").click(function(){
+				location.href=<?php echo "http://www.hereprovides.com/slave/index.php/Slave/transfer/".$enemy; ?>
 			});
 		});
 	</script>

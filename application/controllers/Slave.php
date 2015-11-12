@@ -2,7 +2,7 @@
 class Hello  extends CI_Controller {
 
 
-private function uuid($trim = false) 
+    private function uuid($trim = false) 
     {
 
         $format = ($trim == false) ? '%04x%04x-%04x-%04x-%04x-%04x%04x%04x' : '%04x%04x%04x%04x%04x%04x%04x%04x';
@@ -23,7 +23,7 @@ private function uuid($trim = false)
             mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
     }
-    
+
 	private function judge_result($subject, $object){
 		$num = rand(0, 9);
 		if(num > 4)
@@ -31,6 +31,25 @@ private function uuid($trim = false)
 		else
 			return false;
 	}
+
+
+    private function be_slave($subject, $object){
+        $query = $this->db->get_where('user', ['id'=>$subject]);
+        $data = $query->row();
+        $data->state = 3;
+        $data->asset = 0;
+        $this->db->where('id', $subject);
+        $this->db->update('user', $data);
+
+        $query = $this->db->get_where('user', ['id'=>$object]);
+        $data = $query->row();
+        if($data->state == 1 || $data->state == 5)
+            $data->state = 2;
+        $data->asset = $data->asset + 1;
+        $this->db->where('id', $object);
+        $this->db->update('user', $data);
+    }
+
 	public function capture($enemy)
     {
         $subject = get_cookie("slave_game_user_id");
@@ -38,57 +57,80 @@ private function uuid($trim = false)
         	return 'invalid';
         $result = $this->judge_result($subject, $enemy);
         if($result){
-        	$this->load('owner/palace', []);
+            $this->be_slave($enemy, $subject);
+        	$this->load->view('owner/wall', ['enemy'=>$enemy]);
         }else{
-        	$this->load('slave/squqre', []);
+            $this->be_slave($subject, $enemy);
+        	$this->load->view('owner/wall', ['enemy'=>$enemy]);
         }
     }
 
 	public function add_slave($id, $num){
-    	$this->db->query('update user set state = 2 where id = $subject;');
-    	$query = $this->db->query('select asset from user where id = $subject;');
-    	$salve_num = $query->row()->asset;
-    	$slave_num = $slave_num + $num;
-    	$this->db->query('update user set asset = $slave_num where id = $subject;');
-    	return $slave_num;
+    	$data = $this->db->get_where('user', ['id'=>$id ])->row();
+        if($data->state == 1)
+            $data->state = 2;
+        $data->asset = $data->asset + $num;
+    	$this->update('user', $data);
+    	return $data->asset;
     }
 
     public function tansfer($enemy){
-    	$result = free($enemy);
+        $id = get_cookie("slave_game_user_id");
+    	$result = $this->release($enemy);
     	foreach ($result as $item) {
-    		$this->db->query('insert into slave(owner_id, slave_id) values($subject, $item->slave_id);');
+            $data = ['owner_id'=>$id, 'slave_id'=>$item->slave_id];
+    		$this->db->insert('slave', $data);
     	}
-    	
-    	return add_salve($subject, $result->size());
+    	$slave_num = add_slave($subject, sizeof($result));
+        $this->load->view('owner/palace', []);
+    }
+
+    private function release($enemy){
+        $query = $this->db->query('select id, slave_id from slave where state = 1 and owner_id = \''.$enemy. '\';');
+        $result = $query->result_array();
+        $ids = [];
+        foreach ($result as $item){
+            $ids[] = $item->id;
+        }
+        $this->db->where_in('id', $ids);
+        $this->db->update('slave', ['state'=>2]);
+        return $reuslt;
     }
 
     public function free($enemy){
     	$subject = get_cookie("slave_game_user_id");
-    	$query = $this->db->query('select id, slave_id from slave where state = 1 and owner_id = $enemy;');
-    	$result = $query->result_array();
-    	$this->db->query('update slave set state = 2 where id in $result->id;');
-    	return $reuslt;
+        $this->release($enemy);
+    	$this->load->view('owner/palace', []);
     }
+
 
 	public function raise(){
 		$id = get_cookie("slave_game_user_id");
-		$owner = $this->db->query('select owner_id form slave where slave_id = $id and state = 1;')->row()->owner_id;
-		$query = $this->db->query('select flag from threat, fighter where owner_id = $owner and state = 1;');
+		$owner = $this->db->query('select owner_id form slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
+		$query = $this->db->query('select flag, fighter from threat where state = 1 and owner_id = \''.$owner.'\';');
 		$result = $query->result();
-		if($result == null){
-			$uuid = create_uuid();
-			$this->db->query('insert into threat(flag, owner_id, launcher) values($uuid, $owner, $id)');
-			$this->db->query('insert into raise(flag, slave_id) values($uuid, $id);');
-			$this->db->query('update user set state = 5 where id = $id;');
-			return "lead";
+		if($result == NULL){
+			$uuid = $this->uuid();
+            $this->db->insert('threat', ['falg'=>$uuid, 'owner_id'=> $owner, 'launcher'=>$id]);
+			$this->db->insert('raise', ['flag'=>$uuid, 'slave_id'=>$id]);
+			$this->db->where('id', $id);
+            $this->db->update('user', ['state'=>5]);
+			echo "lead";
 		}else{
 			$holder = $query->row();
-			$threat = $holder->flag;
-			$fighter = $holder->num + 1;
-			$this->db->query('update set fighter = $fighter where flag = $threat;');
-			$this->db->query('insert into raise(flag, slave_id) values($threat, $id);');
-			$this->db->query('update user set state = 4 where id = $id;');
-			return "join";
+            $sum = $this->db->get_where('user', ['id'->$owner])->row()->asset;
+            if($holder->fighter > floor($sum/2)){
+                $this->release($holder->owner_id);
+                $this->be_slave($holder->owner_id, $holder->launcher);
+                $this->load->view('slave/fire', []);
+            }else{
+                $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
+                $this->db->where('flag', $holder->flag);
+                $this->db->update('threat',['fighter'=>$holder->fighter + 1]);
+                $this->db->query('update user set state = 4 where id = $id;');
+                echo "join";
+            }
+            
 		}
 	}
 

@@ -11,24 +11,24 @@ class Owner  extends CI_Controller {
 
 	public function suspect($target){
 		$id = get_cookie("slave_game_user_id");
-		$query = $this->db->query('select state from user where id = $target;');
+		$query = $this->db->get_where('user', ['id'=>$target]);
 		$state = $query->row()->state;
 		if($state == 3){
-			$this->db->query('update set state = 6 where id = $target;');
+			$this->db->query('update set state = 6 where id = \''. $target.'\';');
 			return "success";
 		}else if($state == 4){
-			$this->db->query('update set state = 6 where id = $target;');
+			$this->db->query('update set state = 6 where id = \''. $target.'\';');
 			break_up($id);
 			return "success";
 		}else{
-			$this->db->query('update set state = 7 where id = $id;');
+			$this->db->query('update set state = 7 where id = \''.$id.'\';');
 			return "fail";
 		}
 	}
 
 	private function break_up($id){
-		$flag = $this->db->query('select flag from threat where owner_id = $id;')->row()->flag;
-		$this->db->query('update set state = 3 where flag = $flag;');
+		$flag = $this->db->query('select flag from threat where owner_id = \''.$id.'\';')->row()->flag;
+		$this->db->query('update set state = 3 where flag = \''.$flag.'\';');
 	}
 
 }

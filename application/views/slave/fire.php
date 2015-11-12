@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#home").click(function(){
-				location.href="";
+				location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
 			});
 		});
 	</script>
