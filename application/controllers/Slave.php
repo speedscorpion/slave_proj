@@ -96,7 +96,7 @@ class Slave  extends CI_Controller {
 
     private function release($enemy){
         $query = $this->db->query('select id, slave_id from slave where state = 1 and owner_id = \''.$enemy. '\';');
-        $result = $query->result_array();
+        $result = $query->result();
         return $result;
     }
 
