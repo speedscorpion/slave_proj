@@ -127,7 +127,7 @@ class Slave  extends CI_Controller {
 		$result = $query->result();
 		if($result == NULL){
 			$uuid = $this->uuid();
-            $this->db->insert('threat', ['falg'=>$uuid, 'owner_id'=> $owner, 'launcher'=>$id]);
+            $this->db->insert('threat', ['flag'=>$uuid, 'owner_id'=> $owner, 'launcher'=>$id]);
 			$this->db->insert('raise', ['flag'=>$uuid, 'slave_id'=>$id]);
 			$this->db->where('id', $id);
             $this->db->update('user', ['state'=>5]);
