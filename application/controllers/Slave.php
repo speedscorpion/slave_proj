@@ -122,7 +122,7 @@ class Slave  extends CI_Controller {
 
 	public function raise(){
 		$id = get_cookie("slave_game_user_id");
-		$owner = $this->db->query('select owner_id form slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
+		$owner = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
 		$query = $this->db->query('select flag, fighter from threat where state = 1 and owner_id = \''.$owner.'\';');
 		$result = $query->result();
 		if($result == NULL){
