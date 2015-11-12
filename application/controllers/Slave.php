@@ -134,6 +134,9 @@ class Slave  extends CI_Controller {
 			echo "lead";
 		}else{
 			$holder = $query->row();
+            $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
+            $this->db->where('flag', $holder->flag);
+            $this->db->update('threat',['fighter'=>$holder->fighter + 1]);
             $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
             if($holder->fighter + 1 > floor($sum/2)){
                 $result = $this->release($owner);
@@ -143,12 +146,11 @@ class Slave  extends CI_Controller {
                 }
                 $this->db->where_in('id', $ids);
                 $this->db->update('slave', ['state'=>1]);
+                $this->db->where('flag', $holder->flag);
+                $this->db->update('threat', ['state'=>2]);
                 $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
-                $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
-                $this->db->where('flag', $holder->flag);
-                $this->db->update('threat',['fighter'=>$holder->fighter + 1]);
                 $this->db->where('id', $id);
                 $this->db->update('user', ['state'=>4]);
                 echo "join";
