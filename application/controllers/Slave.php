@@ -109,7 +109,7 @@ class Slave  extends CI_Controller {
                 $ids[] = $item->id;
             }
             $this->db->where_in('id', $ids);
-            $this->db->update('slave', ['state'=>2]);
+            $this->db->update('slave', ['state'=>1]);
         }
         
     	$this->load->view('owner/palace', []);
@@ -142,7 +142,7 @@ class Slave  extends CI_Controller {
                     $ids[] = $item->id;
                 }
                 $this->db->where_in('id', $ids);
-                $this->db->update('slave', ['state'=>2]);
+                $this->db->update('slave', ['state'=>1]);
                 $this->be_slave($owner, $holder->launcher);
                 echo "victory";
             }else{
