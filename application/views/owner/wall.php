@@ -18,11 +18,11 @@
 			});
 
 			$("#give_free").click(function(){
-				location.href=<?php echo "http://www.hereprovides.com/slave/index.php/Slave/free/".$enemy; ?>
+				location.href=<?php echo "\"http://www.hereprovides.com/slave/index.php/Slave/free/".$enemy."\"" ?>;
 			});
 
 			$("#my_slaves").click(function(){
-				location.href=<?php echo "http://www.hereprovides.com/slave/index.php/Slave/transfer/".$enemy; ?>
+				location.href=<?php echo "\"http://www.hereprovides.com/slave/index.php/Slave/transfer/".$enemy."\"" ?>;
 			});
 		});
 	</script>
