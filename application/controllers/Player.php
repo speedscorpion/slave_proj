@@ -2,7 +2,7 @@
 
 class Player extends CI_Controller {
 
-    public function uuid($trim = false) 
+    private function uuid($trim = false) 
     {
 
         $format = ($trim == false) ? '%04x%04x-%04x-%04x-%04x-%04x%04x%04x' : '%04x%04x%04x%04x%04x%04x%04x%04x';
@@ -26,10 +26,42 @@ class Player extends CI_Controller {
 
     public function enter($nickname=NULL)
     {
-        $this->load->database();
+        
         $id = get_cookie("slave_game_user_id");
         if ($id == NULL) { // create new user
-            $id = $this->uuid();
+            $data = create_player();
+        }else{
+            // get user info and return
+            $query = $this->db->get_where('user', array('id'=>$id));
+            $data = $query->row();
+            if($nickname != NULL){
+                $data->nickname = $nickname;
+                $this->db->where('id', $data->id);
+                $this->db->update('user', $data);
+            }
+        }
+        switch ($data->state) {
+            case 1:
+            case 2:
+            case 7:
+                $this->load->view("owner/palace", []);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                $this->load->view("slave/squre", []);
+                break;
+            case 6:
+                $this->load->view("slave/jail", []);
+                break;
+            default:
+                break;
+        }
+        
+    }
+
+    private create_player(){
+        $id = $this->uuid();
             $cookie = array(
                 'name' => 'slave_game_user_id',
                 'value' => $id,
@@ -43,20 +75,9 @@ class Player extends CI_Controller {
             $data = array(
                 'id' => $id,
                 'nickname' => $nickname,
-                'asset' => 0,
-                'state' => 1,
+                'asset' => 0
             );
-            $this->db->insert('user', $data);
-        } else if ($nickname != NULL) { // update nickname
-            $query = $this->db->get_where('user', array('id'=>$id));
-            $data = $query->row();
-            $data->nickname = $nickname;
-            $this->db->where('id', $data->id);
-            $this->db->update('user', $data);
-        }
-        // get user info and return
-        $query = $this->db->get_where('user', array('id'=>$id));
-        $data = $query->row();
-        echo json_encode($data);
+        $this->db->insert('user', $data);
+        return data;
     }
 }
