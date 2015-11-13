@@ -24,15 +24,15 @@ class Owner  extends CI_Controller {
 		$state = $query->row()->state;
 		if($state == 4){
 			$this->eliminate($target, $id);
-			return "success";
+			echo "success";
 		}else if($state == 5){
 			$this->eliminate($target, $id);
 			break_up($id);
-			return "success";
+			echo "success";
 		}else{
 			$this->db->where('id', $id);
-			$this->db->update('user', ['state'=>7, 'cool'=>time()])
-			return "fail";
+			$this->db->update('user', ['state'=>7, 'cool'=>time()]);
+			echo "fail";
 		}
 	}
 
