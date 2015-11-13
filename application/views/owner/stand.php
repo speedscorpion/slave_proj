@@ -7,18 +7,23 @@
 <body>
 	<h1>my stand</h1>
 	<hr>
-	<button id="line_up">one line</button>
-
-	<button id="suspect">suspect</button>
+	<?php
+		foreach ($data as $item) {
+			$tag = "<button class="slave_name" val=\"". $item->id. "\">". $item->nickname. "</button><br/>";
+			echo $tag;
+		}
+	 ?>
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$.ajax("#line_up").click(function(){
+			$.ajax(".slave_name").click(function(){
+				var link = "http://www.hereprovides.com/slave/index.php/Owner/suspect/" + $(this).attr("val");
 				$.ajax({
 					type: "get",
-					url: "http://www.hereprovides.com/slave/index.php/Owner/asset",
+					url: link,
+					dataType: "text",
 					success: function(data){
-
+						alert(data);
 					}
 				});
 			});

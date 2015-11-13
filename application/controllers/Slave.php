@@ -52,6 +52,13 @@ class Slave  extends CI_Controller {
         $this->db->insert('slave', ['owner_id'=>$object, 'slave_id'=>$subject]);
     }
 
+
+    private function get_rid_of_threat($target){
+        $query = $this->db->query('select flag from threat where state = 1 and owner_id = \''.$target.'\';');
+        if($query->result() != [])
+            $this->db->query('update set state = 3 where flag = \''.$query->row()->flag.'\';');
+    }
+
 	public function capture($enemy)
     {
         $subject = get_cookie("slave_game_user_id");
@@ -60,8 +67,20 @@ class Slave  extends CI_Controller {
         $result = $this->judge_result($subject, $enemy);
         if($result){
             $this->be_slave($enemy, $subject);
+            $flag = $this->db->query('select flag from threat where owner_id = \''.$id.'\';')->row()->flag;
+            $this->get_rid_of_threat($enemy);
         	$this->load->view('owner/wall', ['enemy'=>$enemy]);
         }else{
+            $result = $this->release($subject);
+            if($result != []){
+                $this->db->where_in('id', $this->get_slave_relation($result));
+                $this->db->update('slave',['state'=>2]);
+
+                $this->db->where_in('id', $this->get_slaves($result));
+                $this->db->update('user', ['state'=>1]);
+
+                $this->get_rid_of_threat($subject);                
+            }
             $this->be_slave($subject, $enemy);
         	$this->load->view('owner/wall', ['enemy'=>$enemy]);
         }
@@ -83,7 +102,7 @@ class Slave  extends CI_Controller {
             foreach ($this->get_slaves($result) as $item) 
                 $this->db->insert('slave', ['owner_id'=>$id, 'slave_id'=>$item]);
             $slave_num = $this->add_slave($subject, sizeof($result));
-            
+
             $this->db->where_in('id', $this->get_slaves($result));
             $this->db->update('user', ['state'=>3]);
 

@@ -42,9 +42,10 @@ class Player extends CI_Controller {
             }
         }
         switch ($data->state) {
+            case 7:
+                $this->still_cool();
             case 1:
             case 2:
-            case 7:
                 $this->load->view("owner/palace", []);
                 break;
             case 3:
@@ -53,13 +54,34 @@ class Player extends CI_Controller {
                 $this->load->view("slave/square", []);
                 break;
             case 6:
-                $this->load->view("slave/jail", []);
+                if($this->still_cool())
+                    $this->load->view("slave/jail", []);
+                else
+                    $this->load->view("slave/square", []);
                 break;
             default:
                 break;
         }
         
     }
+
+    private function still_cool($id){
+        $query = $this->db->query('select cool, state from user where id = \''.$id . '\';');
+        $cool_time = $query->row()->cool;
+        $state = $query->row()->state;
+        if(time() - $cool_time > 5* 60){
+            $this->db->where('id', $id);
+            if($state == 7)
+                $this->db->update('user', ['state'=>2]);
+            else
+                $this->db->update('user', ['state'=>3]);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    
 
     private function create_player($nickname){
         $id = $this->uuid();

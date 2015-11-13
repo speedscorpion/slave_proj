@@ -19,11 +19,11 @@
 		$(function() {
 
 			$("#go_stand").click(function(){
-
+				location.href="http://www.hereprovides.com/slave/index.php/Owner/asset";
 			});
 			
 			$("#go_jail").click(function(){
-
+				location.href="http://www.hereprovides.com/slave/index.php/Owner/jail"
 			});
 
 			$("#neigborhood").click(function(){
