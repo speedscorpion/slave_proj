@@ -9,7 +9,7 @@
 	<hr>
 	<?php
 		foreach ($data as $item) {
-			$tag = "<button class="slave_name" val=\"". $item->id. "\">". $item->nickname. "</button><br/>";
+			$tag = "<button class=\"slave_name\" val=\"". $item->id. "\">". $item->nickname. "</button><br/>";
 			echo $tag;
 		}
 	 ?>
