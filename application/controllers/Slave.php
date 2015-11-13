@@ -67,7 +67,6 @@ class Slave  extends CI_Controller {
         $result = $this->judge_result($subject, $enemy);
         if($result){
             $this->be_slave($enemy, $subject);
-            $flag = $this->db->query('select flag from threat where owner_id = \''.$id.'\';')->row()->flag;
             $this->get_rid_of_threat($enemy);
         	$this->load->view('owner/wall', ['enemy'=>$enemy]);
         }else{
