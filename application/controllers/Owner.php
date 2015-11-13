@@ -39,7 +39,7 @@ class Owner  extends CI_Controller {
 	private function eliminate($target, $owner){
 		$this->db->where('id', $target);
 		$this->db->update('user', ['state'=>6, 'cool'=>time()]);
-		$query = $this->db->query('select flag, fighter from threat where state = 1 and owner = \''. $owner. '\';');
+		$query = $this->db->query('select flag, fighter from threat where state = 1 and owner_id = \''. $owner. '\';');
 		$data = $query->row();
 		$this->db->where('flag', $data->flag);
 		$this->db->update('threat', ['fighter'=>$data->fighter - 1]);
