@@ -43,7 +43,7 @@ class Player extends CI_Controller {
         }
         switch ($data->state) {
             case 7:
-                $this->still_cool();
+                $this->still_cool($id);
             case 1:
             case 2:
                 $this->load->view("owner/palace", []);
@@ -54,7 +54,7 @@ class Player extends CI_Controller {
                 $this->load->view("slave/square", []);
                 break;
             case 6:
-                if($this->still_cool())
+                if($this->still_cool($id))
                     $this->load->view("slave/jail", []);
                 else
                     $this->load->view("slave/square", []);
