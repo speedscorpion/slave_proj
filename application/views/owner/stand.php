@@ -16,7 +16,7 @@
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$.ajax(".slave_name").click(function(){
+			$(".slave_name").click(function(){
 				var link = "http://www.hereprovides.com/slave/index.php/Owner/suspect/" + $(this).attr("val");
 				$.ajax({
 					type: "get",
