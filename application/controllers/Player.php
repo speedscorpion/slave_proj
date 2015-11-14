@@ -24,15 +24,20 @@ class Player extends CI_Controller {
         );
     }
 
-    public function enter($nickname=NULL)
-    {
-        
+    public function state(){
         $id = get_cookie("slave_game_user_id");
-        if ($id == NULL) { // create new user
+        $this->still_cool($id);
+        $query = $this->db->get_where('user', array('id'=>$id));
+        $data = $query->row();
+        echo $data->state;
+    }
+
+    public function change($nickname){
+        $id = get_cookie("slave_game_user_id");
+        if($id == NULL){
             $data = $this->create_player($nickname);
-            $data['state'] = 1;
+            $this->enter();
         }else{
-            // get user info and return
             $query = $this->db->get_where('user', array('id'=>$id));
             $data = $query->row();
             if($nickname != NULL){
@@ -41,6 +46,18 @@ class Player extends CI_Controller {
                 $this->db->update('user', $data);
             }
         }
+            
+    }
+
+    public function enter()
+    {
+        $id = get_cookie("slave_game_user_id");
+        if ($id == NULL) { // create new user
+            $this->load->view('index', []);
+            return;
+        }
+        $query = $this->db->get_where('user', array('id'=>$id));
+        $data = $query->row();
         switch ($data->state) {
             case 7:
                 $this->still_cool($id);
