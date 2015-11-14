@@ -25,12 +25,12 @@
 	<hr>
 	<h2>平定叛乱</h2>
 		<?php 
-			echo $data->handle_count. '次';
+			echo json_encode($data->handle_count). '次';
 		?>
 	<hr>
 	<h2>推翻暴政</h2>
 		<?php 
-			echo $data->raise_count. '次';
+			echo json_encode($data->raise_count). '次';
 		?>
 	<hr>
 

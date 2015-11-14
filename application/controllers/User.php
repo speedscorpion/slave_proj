@@ -22,9 +22,9 @@ class User extends CI_Controller{
         $query = $this->db->query('select * from slave where slave_id = \''.$id.'\';');
         $data['slave_record'] = $query->result();
         $query = $this->db->query('select count(*) from threat where state = 3 and owner_id = \''.$id.'\';');
-        $data['handle_count'] = $query->row()->count(*);
+        $data['handle_count'] = $query->row_array();
         $query = $this->db->query('select count(*) from threat where state = 2 and flag in (select flag from raise where slave_id = \''.$id.'\');');
-        $data['raise_count'] = $query->row()->count(*);
+        $data['raise_count'] = $query->row_array();
         return $data;
     }
 
