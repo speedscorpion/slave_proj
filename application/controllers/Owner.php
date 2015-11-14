@@ -47,7 +47,7 @@ class Owner  extends CI_Controller {
 
 	private function break_up($id){
 		$flag = $this->db->query('select flag from threat where state = 1 and owner_id = \''.$id.'\';')->row()->flag;
-		$this->db->query('update set state = 3 where flag = \''.$flag.'\';');
+		$this->db->query('update threat set state = 3 where flag = \''.$flag.'\';');
 	}
 
 }
