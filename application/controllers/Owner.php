@@ -26,8 +26,7 @@ class Owner  extends CI_Controller {
 			$this->eliminate($target, $id);
 			echo "success";
 		}else if($state == 5){
-			$this->break_up($id);
-			$this->eliminate($target, $id);
+			$this->break_up($id, $target);
 			echo "success";
 		}else{
 			$this->db->where('id', $id);
@@ -45,7 +44,7 @@ class Owner  extends CI_Controller {
 		$this->db->update('threat', ['fighter'=>$data->fighter - 1]);
 	}
 
-	private function break_up($id){
+	private function break_up($id $target){
 		$flag = $this->db->query('select flag from threat where state = 1 and owner_id = \''.$id.'\';')->row()->flag;
 		$this->db->query('update threat set state = 3 where flag = \''.$flag.'\';');
 		$query = $this->db->query('update user set state = 3 where id in (select slave_id from raise where flag = \''.$flag. '\');');
