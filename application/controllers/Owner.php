@@ -9,7 +9,7 @@ class Owner  extends CI_Controller {
 
 	public function jail(){
 		$id = get_cookie("slave_game_user_id");
-		$query = $this->db->query('select nickname, id form user where state = 6 and id in (select slave_id from slave where state = 1 and owner_id = \''.$id.'\');');
+		$query = $this->db->query('select nickname, id from user where state = 6 and id in (select slave_id from slave where state = 1 and owner_id = \''.$id.'\');');
 		$this->load->view('owner/jail', ['data'=>$query->result()]);
 	}
 
