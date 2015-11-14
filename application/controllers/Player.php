@@ -36,7 +36,6 @@ class Player extends CI_Controller {
         $id = get_cookie("slave_game_user_id");
         if($id == NULL){
             $data = $this->create_player($nickname);
-            $this->enter();
         }else{
             $query = $this->db->get_where('user', array('id'=>$id));
             $data = $query->row();
@@ -46,7 +45,7 @@ class Player extends CI_Controller {
                 $this->db->update('user', $data);
             }
         }
-            
+        $this->load->view("owner/palace", []);
     }
 
     public function enter()

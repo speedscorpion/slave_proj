@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 		$(function() {
 			$("#start").click(function(){
-				location.href="http://www.hereprovides.com/slave/index.php/Player/change/" + $("#name").attr('value');
+				location.href="http://www.hereprovides.com/slave/index.php/Player/change/" + $("#name").val();
 			});
 		});
 	</script>
