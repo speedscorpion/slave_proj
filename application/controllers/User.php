@@ -22,12 +22,12 @@ class User extends CI_Controller{
         $query = $this->db->query('select * from user where id in (select owner_id from slave where slave_id = \''.$id.'\');');
         $data['slave_record'] = $query->result();
         $query = $this->db->query('select count(*) from threat where state = 3 and owner_id = \''.$id.'\';');
-        $data['handle_count'] = $query->row_array();
+        $data['handle_count'] = $query->row_array()['count(*)'];
         $query = $this->db->query('select count(*) from threat where state = 2 and flag in (select flag from raise where slave_id = \''.$id.'\');');
-        $data['raise_count'] = $query->row_array();
+        $data['raise_count'] = $query->row_array()['count(*)'];
 
-        $nickname = $this->db->query('select nickname from user where id = \''.$id.'\';')->row()->nickname;
-        $data['nickname'] = $nickname;
+        $user = $this->db->query('select nickname from user where id = \''.$id.'\';')->row();
+        $data['user'] = $user;
         return $data;
     }
 
