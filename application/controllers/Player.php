@@ -72,9 +72,9 @@ class Player extends CI_Controller {
         if(time() - $cool_time > 5* 60){
             $this->db->where('id', $id);
             if($state == 7)
-                $this->db->update('user', ['state'=>2]);
+                $this->db->update('user', ['state'=>2, 'cool'=>0]);
             else
-                $this->db->update('user', ['state'=>3]);
+                $this->db->update('user', ['state'=>3, 'cool'=>0]);
             return false;
         }else{
             return true;
