@@ -27,7 +27,7 @@ class Owner  extends CI_Controller {
 			echo "success";
 		}else if($state == 5){
 			$this->eliminate($target, $id);
-			break_up($id);
+			$this->break_up($id);
 			echo "success";
 		}else{
 			$this->db->where('id', $id);
