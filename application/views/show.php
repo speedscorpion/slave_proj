@@ -9,7 +9,7 @@
 	<hr>
 	<h2>朕的奴隶</h2>
 		<?php
-			foreach ($data->owner_record as $item) {
+			foreach ($owner_record as $item) {
 				$tag = "<a href='http://www.hereprovides.com/slave/index.php/User/state/".$item->id."'>".$item->nickname."</a><br/>";
 				echo $tag;
 			}
@@ -17,7 +17,7 @@
 	<hr>
 	<h2>我的主人</h2>
 		<?php
-			foreach ($data->slave_record as $item) {
+			foreach ($slave_record as $item) {
 				$tag = "<a href='http://www.hereprovides.com/slave/index.php/User/state/".$item->id."'>".$item->nickname."</a><br/>";
 				echo $tag;
 			}
@@ -25,12 +25,12 @@
 	<hr>
 	<h2>平定叛乱</h2>
 		<?php 
-			echo json_encode($data->handle_count). '次';
+			echo json_encode($handle_count). '次';
 		?>
 	<hr>
 	<h2>推翻暴政</h2>
 		<?php 
-			echo json_encode($data->raise_count). '次';
+			echo json_encode($raise_count). '次';
 		?>
 	<hr>
 
