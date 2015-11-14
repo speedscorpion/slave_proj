@@ -90,7 +90,8 @@ class Slave  extends CI_Controller {
         if($data->state == 1)
             $data->state = 2;
         $data->asset = $data->asset + $num;
-    	$this->update('user', $data);
+        $this->db->where('id', $id);
+    	$this->db->update('user', $data);
     	return $data->asset;
     }
 
