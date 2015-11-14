@@ -17,9 +17,9 @@ class User extends CI_Controller{
 
     private function get_data($id){
         $data = [];
-        $query = $this->db->query('select * from slave where owner_id = \''.$id.'\';');
+        $query = $this->db->query('select * from user where id in select slave_id from slave where owner_id = \''.$id.'\';');
         $data['owner_record'] = $query->result();
-        $query = $this->db->query('select * from slave where slave_id = \''.$id.'\';');
+        $query = $this->db->query('select * from user where id in select owner_id from slave where slave_id = \''.$id.'\';');
         $data['slave_record'] = $query->result();
         $query = $this->db->query('select count(*) from threat where state = 3 and owner_id = \''.$id.'\';');
         $data['handle_count'] = $query->row_array();
