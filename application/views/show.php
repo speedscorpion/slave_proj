@@ -36,7 +36,7 @@
 
 	<a href="http://www.hereprovides.com/slave/index.php/Player/enter">join game</a>
 
-	<a href=<?php echo "'http://www.hereprovides.com/slave/index.php/User/state/". $user->id. "'" ?> ></a>
+	<a href=<?php echo "'http://www.hereprovides.com/slave/index.php/User/state/". $user->id. "'" ?> >share link</a>
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 

@@ -26,7 +26,7 @@ class User extends CI_Controller{
         $query = $this->db->query('select count(*) from threat where state = 2 and flag in (select flag from raise where slave_id = \''.$id.'\');');
         $data['raise_count'] = $query->row_array()['count(*)'];
 
-        $user = $this->db->query('select nickname from user where id = \''.$id.'\';')->row();
+        $user = $this->db->query('select * from user where id = \''.$id.'\';')->row();
         $data['user'] = $user;
         return $data;
     }
