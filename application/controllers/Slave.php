@@ -171,7 +171,7 @@ class Slave  extends CI_Controller {
             $this->db->where('flag', $holder->flag);
             $this->db->update('threat',['fighter'=>$holder->fighter + 1]);
             $sum = $this->db->get_where('user', ['id'=>$owner])->row()->asset;
-            if($holder->fighter + 1 > floor($sum/2) && 0){
+            if($holder->fighter + 1 > floor($sum/2)){
                 $result = $this->release($owner);
                 
                 $this->db->where_in('id', $this->get_slaves($result));

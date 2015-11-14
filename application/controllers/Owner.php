@@ -3,19 +3,14 @@ class Owner  extends CI_Controller {
 
 	public function asset(){
 		$id = get_cookie("slave_game_user_id");
-		$query = $this->db->query('select slave_id from slave where owner_id = \''.$id.'\';');
-		$result = $query->result_array();
-		$slaves = [];
-		foreach ($result as $item) {
-			$slaves[] = $item['slave_id'];
-		}
-		$this->db->where_in('id', $slaves);
-		$data = $this->db->get('user')->result();
-		$this->load->view('owner/stand', ['data'=>$data]);
+		$query = $this->db->query('select nickname, id from user where state != 6 and id in (select slave_id from slave where state = 1 and owner_id = \''.$id.'\');');
+		$this->load->view('owner/stand', ['data'=>$query->result()]);
 	}
 
 	public function jail(){
-		$this->load->view('owner/jail', []);
+		$id = get_cookie("slave_game_user_id");
+		$query = $this->db->query('select nickname, id form user where state = 6 and id in (select slave_id from slave where state = 1 and owner_id = \''.$id.'\');');
+		$this->load->view('owner/jail', ['data'=>$query->result()]);
 	}
 
 	public function suspect($target){
