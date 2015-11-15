@@ -26,7 +26,7 @@ class Slave  extends CI_Controller {
 
 	private function judge_result($subject, $object){
 		$num = rand(0, 9);
-		if($num > -1)
+		if($num > 4)
 			return true;
 		else
 			return false;
@@ -68,7 +68,7 @@ class Slave  extends CI_Controller {
         if($result){
             $this->be_slave($enemy, $subject);
             $this->get_rid_of_threat($enemy);
-        	$this->load->view('owner/wall', ['enemy'=>$enemy]);
+        	$this->load->view('owner/wall', ['enemy'=>$enemy, 'result'=>true]);
         }else{
             $result = $this->release($subject);
             if($result != []){
@@ -81,7 +81,7 @@ class Slave  extends CI_Controller {
                 $this->get_rid_of_threat($subject);                
             }
             $this->be_slave($subject, $enemy);
-        	$this->load->view('owner/wall', ['enemy'=>$enemy]);
+        	$this->load->view('owner/wall', ['enemy'=>$enemy, 'result'=>false]);
         }
     }
 
