@@ -158,7 +158,8 @@ class Slave  extends CI_Controller {
 		$owner = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
 		$query = $this->db->query('select flag, fighter, launcher from threat where state = 1 and owner_id = \''.$owner.'\';');
 		$result = $query->result();
-		if($result == NULL){
+        echo $result;
+		if($result == []){
 			$uuid = $this->uuid();
             $this->db->insert('threat', ['flag'=>$uuid, 'owner_id'=> $owner, 'launcher'=>$id]);
 			$this->db->insert('raise', ['flag'=>$uuid, 'slave_id'=>$id]);
