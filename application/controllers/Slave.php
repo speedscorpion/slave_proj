@@ -158,7 +158,7 @@ class Slave  extends CI_Controller {
         $owner_data = $this->db->query('select * from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
 		$owner = $owner_data->owner_id;
         $owner_asset = $owner->asset;
-        if($owner_asset == < 1){
+        if($owner_asset < 2){
             echo "就你一个犯人，并不能造反";
             return;
         }
