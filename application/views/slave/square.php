@@ -92,10 +92,14 @@
 	<div id="content">
 		<h1 id="page_title">惨遭奴役</h1>
         <div class="declare-box">
-            <p>我每天受着非人的待遇，总有一天我要把这个暴君推翻</p>
+            <p>我是<?php echo $user->nickname;?></p>
+            <p>我是一个奴隶</p>
+            <p>我每天受着非人的待遇</p>
+            <p>总有一天我要把这个暴君推翻</p>
         </div>
+        
 		<div style="text-align: center">
-			<button id="raise">起义</button>
+			<button id="raise">不能忍了</button>
 		</div>
 
 		
@@ -105,6 +109,12 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#raise").click(function(){
+                var state = <?php echo $user->state;?>
+                if( state == 4 || state == 5){
+                    $('#holder_box').show();
+                    $("#holder").html(('<div style="text-align: center;"><p>' + '已经造反过了，同学' + '</p></div>'));
+                    return;
+                }
 				$.ajax({
 					type: "get",
 					url: "http://www.hereprovides.com/slave/index.php/Slave/raise",

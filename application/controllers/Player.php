@@ -62,18 +62,18 @@ class Player extends CI_Controller {
                 $this->still_cool($id);
             case 1:
             case 2:
-                $this->load->view("owner/palace", []);
+                $this->load->view("owner/palace", ['user', $data]);
                 break;
             case 3:
             case 4:
             case 5:
-                $this->load->view("slave/square", []);
+                $this->load->view("slave/square", ['user', $data]);
                 break;
             case 6:
                 if($this->still_cool($id))
-                    $this->load->view("slave/jail", []);
+                    $this->load->view("slave/jail", ['user', $data]);
                 else
-                    $this->load->view("slave/square", []);
+                    $this->load->view("slave/square", ['user', $data]);
                 break;
             default:
                 break;
