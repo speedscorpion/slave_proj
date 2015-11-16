@@ -21,7 +21,7 @@
         	width: 100%;
         	height: 100%;
         	background-image: url(http://202ar.oss-cn-shenzhen.aliyuncs.com/owner_stand.jpg);
-        	background-size: 100% 100%;
+        	background-size: 100%;
         	background-position: center center;
         }
         #page_title {

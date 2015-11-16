@@ -26,7 +26,7 @@ class Slave  extends CI_Controller {
 
 	private function judge_result($subject, $object){
 		$num = rand(0, 9);
-		if($num > 4)
+		if($num > 9)
 			return true;
 		else
 			return false;

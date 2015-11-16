@@ -21,7 +21,7 @@
         	width: 100%;
         	height: 100%;
         	background-image: url(http://202ar.oss-cn-shenzhen.aliyuncs.com/palace.jpg);
-        	background-size: 100% 100%;
+        	background-size: 100%;
         	background-position: center center;
         }
         #page_title {
@@ -63,13 +63,13 @@
         	color: #000;
         }		/* 未访问的链接 */
         a:visited {
-        	color: #00FF00
+        	color: #000
         }	/* 已访问的链接 */
         a:hover {
-        	color: #FF00FF
+        	color: #000
         }	/* 鼠标移动到链接上 */
         a:active {
-        	color: #0000FF
+        	color: #000
         }
     </style>
 </head>
@@ -77,9 +77,9 @@
     <div id="content">
         <h1 id="page_title">我的宫殿</h1>
 	    <div class="action-zoom">
-	    	<button class="action-btn" id="go_jail">监狱</button>
-	    	<button class="action-btn" id="go_stand">广场</button>
-	    	<button class="action-btn" id="neigborhood">侵略</button>
+	    	<button class"action-btn" id="go_jail">看看我的犯人</button>
+	    	<button class="action-btn" id="go_stand">看看我的奴隶</button>
+	    	<button class="action-btn" id="neigborhood">进攻</button>
 	    </div>
 	    <div id="holder_box"><div id="holder"></div></div>
     </div>
