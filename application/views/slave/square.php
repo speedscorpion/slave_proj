@@ -109,7 +109,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#raise").click(function(){
-                var state = <?php echo $user->state;?>
+                var state = <?php echo $user->state;?>;
                 if( state == 4 || state == 5){
                     $('#holder_box').show();
                     $("#holder").html(('<div style="text-align: center;"><p>' + '已经造反过了，同学' + '</p></div>'));
