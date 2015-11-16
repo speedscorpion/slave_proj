@@ -78,9 +78,11 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">惨遭奴役</h1>
+        <h2>我每天受着非人的待遇，总有一天我要把这个暴君推翻</h2>
 		<div style="text-align: center">
 			<button id="raise">起义</button>
 		</div>
+
 		
 		<div id="holder_box"><div id="holder"></div></div>
 	</div>

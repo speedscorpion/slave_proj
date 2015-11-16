@@ -78,13 +78,14 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">天牢</h1>
+        <h2>造反被抓了，我再也不敢了，我知道错了。放我出去，主人</h2>
 		<div style="text-align: center"><button id="beg">跪求</button></div>
 	</div>
 	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$("#beg").click(function(){
-				
+				alert("然而无情的奴隶主没有理会我的哀求");
 			});
 		});
 	</script>

@@ -76,6 +76,7 @@
 <body>
     <div id="content">
     	<h1 id="page_title">广场</h1>
+    	<h2>听说你们有人想造反，到底是谁呢，我决定挑一个拷问一下</h2>
     	<div id="holder_box"><div id="holder">
 	<?php
 		foreach ($data as $item) {
@@ -102,10 +103,15 @@
 					url: link,
 					dataType: "text",
 					success: function(data){
-						if (data === 'success') {
-							location.href = 'http://www.hereprovides.com/slave/index.php/Owner/jail'
+						if(data == 'invalid'){
+							alert('寡人还需要反省，不能随便怀疑别人');
+						}else if (data == 'success') {
+							alert('想造反，活得不耐烦了');
+							//这里把奴隶列表里面刚被怀疑的人删掉
+						}else if(data == 'fail'){
+							alert('听信小人之言，错怪你了，待朕面壁思过');
 						}
-						alert(data);
+						
 					}
 				});
 			});

@@ -18,7 +18,7 @@ class Owner  extends CI_Controller {
         $query = $this->db->query('select cool, state from user where id = \''.$id . '\';');
         $cool_time = $query->row()->cool;
         $state = $query->row()->state;
-        if(time() - $cool_time > 5* 60){
+        if(time() - $cool_time > 10){
             $this->db->where('id', $id);
             if($state == 7)
                 $this->db->update('user', ['state'=>2, 'cool'=>0]);

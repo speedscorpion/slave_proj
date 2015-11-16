@@ -77,10 +77,18 @@
 	<div id="content">
 		<h1 id="page_title">战争结果</h1>
 
+        <h2>经过艰苦卓绝的战斗</h2>
+        <?php 
+            if($result){
+                echo "得胜归来，谁敢来战</br>这是敌人蹂躏过的奴隶，放了他们还是继续蹂躏？";
+            }else{
+                echo "你已战败，认命吧";
+            }
+        ?>
 		<div class="action-zoom">
-			<button class="action-btn" id="accept">接受结果</button>
-			<button class="action-btn" id="give_free">释放奴隶</button>
-			<button class="action-btn" id="my_slaves">霸占奴隶</button>
+			<button class="action-btn" id="accept">在下服了</button>
+			<button class="action-btn" id="give_free">还你们自由</button>
+			<button class="action-btn" id="my_slaves">你们现在是我的啦</button>
 		</div>
 	</div>
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>

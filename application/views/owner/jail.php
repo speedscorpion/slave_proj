@@ -76,6 +76,8 @@
 <body>
     <div id="content">
     	<h1 id="page_title">我的监狱</h1>
+
+        <h2>你们居然敢造反，这下知道朕的厉害了</h2>
     	
     	<div id="holder_box"><div id="holder">
 		<?php

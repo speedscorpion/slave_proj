@@ -164,7 +164,7 @@ class Slave  extends CI_Controller {
 			$this->db->insert('raise', ['flag'=>$uuid, 'slave_id'=>$id]);
 			$this->db->where('id', $id);
             $this->db->update('user', ['state'=>5]);
-			echo "lead";
+			echo "我策划了一场起义，希望能干掉这个暴君";
 		}else{
 			$holder = $query->row();
             $this->db->insert('raise', ['flag'=>$holder->flag, 'slave_id'=>$id]);
@@ -188,7 +188,7 @@ class Slave  extends CI_Controller {
             }else{
                 $this->db->where('id', $id);
                 $this->db->update('user', ['state'=>4]);
-                echo "join";
+                echo "我参加了一场起义，我要推翻这个暴君";
             }
             
 		}

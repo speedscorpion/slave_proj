@@ -78,6 +78,7 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">自由了</h1>
+        <h2>经过艰苦卓绝的奋斗，造反成功，暴政终于被推翻，奴隶们获得了自由</h2>
 		<div style="text-align: center">
 			<button id="home">回家</button>
 		</div>

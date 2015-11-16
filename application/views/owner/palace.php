@@ -76,10 +76,12 @@
 <body>
     <div id="content">
         <h1 id="page_title">我的宫殿</h1>
+        <h2>看，这里是朕的江山</h2>
+        <h2>下一步去做点什么呢</h2>
 	    <div class="action-zoom">
 	    	<button class"action-btn" id="go_jail">看看我的犯人</button>
-	    	<button class="action-btn" id="go_stand">看看我的奴隶</button>
-	    	<button class="action-btn" id="neigborhood">进攻</button>
+	    	<button class="action-btn" id="go_stand">巡视我的奴隶</button>
+	    	<button class="action-btn" id="neigborhood">挑一个对手干掉</button>
 	    </div>
 	    <div id="holder_box"><div id="holder"></div></div>
     </div>
