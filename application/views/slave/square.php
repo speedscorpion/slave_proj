@@ -41,7 +41,7 @@
             display: block;
             margin: 10px auto;
             width: 70%;
-            height: 10%;
+            height: 25%;
             background-color: rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             text-align: center;
