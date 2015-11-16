@@ -37,6 +37,19 @@
         .action-btn {
         	margin: 10px;
         }
+        .declare-box {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+            height: 10%;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .declare-box p{
+            margin: 0;
+            padding: 5px;
+        }
         #holder_box {
         	display: none;
         	margin: 0 auto;
@@ -76,8 +89,10 @@
 <body>
     <div id="content">
         <h1 id="page_title">我的宫殿</h1>
-        <h2>看，这里是朕的江山</h2>
-        <h2>下一步去做点什么呢</h2>
+        <div class="declare-box">
+            <p>看，这里是朕的江山</p>
+            <p>下一步去做点什么呢</p>
+        </div>
 	    <div class="action-zoom">
 	    	<button class"action-btn" id="go_jail">看看我的犯人</button>
 	    	<button class="action-btn" id="go_stand">巡视我的奴隶</button>

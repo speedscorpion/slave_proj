@@ -37,6 +37,40 @@
         .action-btn {
         	margin: 10px;
         }
+        .result-box {
+              float: left;
+  display: block;
+  width: 76%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 12%;
+        }
+        .result-box p{
+            margin: 0;
+            padding: 5px 12px;
+        }
+        .single-btn {
+            background-color: #FFF;
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: rgb(20, 119, 255);
+            color: #FFF;
+        }
+        .double-btn {
+              background-color: #FFF;
+  width: 86%;
+  margin: 0 auto;
+  height: 30px;
+  border-radius: 5px;
+  background-color: rgb(20, 119, 255);
+  color: #FFF;
+    margin: 15px auto;
+        }
         #holder_box {
         	display: block;
         	margin: 0 auto;
@@ -77,19 +111,29 @@
 	<div id="content">
 		<h1 id="page_title">战争结果</h1>
 
-        <h2>经过艰苦卓绝的战斗</h2>
-        <?php 
+        <div class="result-box">
+            <p>经过艰苦卓绝的战斗</p>
+            <?php 
             if($result){
-                echo "得胜归来，谁敢来战</br>这是敌人蹂躏过的奴隶，放了他们还是继续蹂躏？";
+            // if(1){
+                echo "<p>得胜归来，谁敢来战</p><p>这是敌人蹂躏过的奴隶，放了他们还是继续蹂躏？</p>";
+                echo '<div style="float:left;width:50%"><div class="double-btn" id="give_free"><p>还你们自由</p></div></div>';
+                echo '<div style="float:left;width:50%"><div class="double-btn" id="my_slaves"><p>你们是我的啦</p></div></div>';
+                
             }else{
-                echo "你已战败，认命吧";
+                echo "<p>你已战败，认命吧</p>";
+                echo '<div class="single-btn" id="accept"><p>在下服了</p></div>';
             }
         ?>
-		<div class="action-zoom">
-			<button class="action-btn" id="accept">在下服了</button>
-			<button class="action-btn" id="give_free">还你们自由</button>
-			<button class="action-btn" id="my_slaves">你们现在是我的啦</button>
-		</div>
+
+        </div>
+
+        
+		<!-- <div class="action-zoom"> -->
+			<!-- <button class="action-btn" id="accept">在下服了</button> -->
+			<!-- <button class="action-btn" id="give_free">还你们自由</button>
+			<button class="action-btn" id="my_slaves">你们现在是我的啦</button> -->
+		<!-- </div> -->
 	</div>
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">

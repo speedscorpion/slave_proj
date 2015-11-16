@@ -37,6 +37,19 @@
         .action-btn {
         	margin: 10px;
         }
+        .declare-box {
+            display: block;
+            margin: 10px auto;
+            width: 70%;
+            height: 14%;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .declare-box p{
+            margin: 0;
+            padding: 5px;
+        }
         #holder_box {
         	display: none;
         	margin: 0 auto;
@@ -78,7 +91,9 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">自由了</h1>
-        <h2>经过艰苦卓绝的奋斗，造反成功，暴政终于被推翻，奴隶们获得了自由</h2>
+        <div class="declare-box">
+            <p>经过艰苦卓绝的奋斗，造反成功，暴政终于被推翻，奴隶们获得了自由</p>
+        </div>
 		<div style="text-align: center">
 			<button id="home">回家</button>
 		</div>

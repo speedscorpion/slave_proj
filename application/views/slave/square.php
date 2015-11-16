@@ -37,6 +37,19 @@
         .action-btn {
         	margin: 10px;
         }
+        .declare-box {
+            display: block;
+            margin: 10px auto;
+            width: 70%;
+            height: 10%;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .declare-box p{
+            margin: 0;
+            padding: 5px;
+        }
         #holder_box {
         	display: none;
         	margin: 0 auto;
@@ -78,7 +91,9 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">惨遭奴役</h1>
-        <h2>我每天受着非人的待遇，总有一天我要把这个暴君推翻</h2>
+        <div class="declare-box">
+            <p>我每天受着非人的待遇，总有一天我要把这个暴君推翻</p>
+        </div>
 		<div style="text-align: center">
 			<button id="raise">起义</button>
 		</div>
@@ -99,7 +114,7 @@
 							location.href="http://www.hereprovides.com/slave/index.php/Slave/victory";
 						else {
 							$('#holder_box').show();
-							$("#holder").append(('<div class="neigborhood-list">' + data + '</div>'));
+							$("#holder").html(('<div style="text-align: center;"><p>' + data + '</p></div>'));
 						}
 					}
 				});

@@ -37,6 +37,19 @@
         .action-btn {
         	margin: 10px;
         }
+        .declare-box {
+            display: block;
+            margin: 10px auto;
+            width: 70%;
+            height: 10%;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .declare-box p{
+            margin: 0;
+            padding: 5px;
+        }
         #holder_box {
         	display: block;
         	margin: 0 auto;
@@ -76,7 +89,9 @@
 <body>
     <div id="content">
     	<h1 id="page_title">广场</h1>
-    	<h2>听说你们有人想造反，到底是谁呢，我决定挑一个拷问一下</h2>
+        <div class="declare-box">
+            <p>听说你们有人想造反，到底是谁呢，我决定挑一个拷问一下</p>
+        </div>
     	<div id="holder_box"><div id="holder">
 	<?php
 		foreach ($data as $item) {
