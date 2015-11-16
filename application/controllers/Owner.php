@@ -13,8 +13,27 @@ class Owner  extends CI_Controller {
 		$this->load->view('owner/jail', ['data'=>$query->result()]);
 	}
 
+
+	private function still_cool($id){
+        $query = $this->db->query('select cool, state from user where id = \''.$id . '\';');
+        $cool_time = $query->row()->cool;
+        $state = $query->row()->state;
+        if(time() - $cool_time > 5* 60){
+            $this->db->where('id', $id);
+            if($state == 7)
+                $this->db->update('user', ['state'=>2, 'cool'=>0]);
+            else
+                $this->db->update('user', ['state'=>3, 'cool'=>0]);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 	public function suspect($target){
 		$id = get_cookie("slave_game_user_id");
+		if($this->still_cool($id))
+			echo 'invalid';
 		$query = $this->db->get_where('user', ['id'=>$target]);
 		$state = $query->row()->state;
 		if($state == 4){
