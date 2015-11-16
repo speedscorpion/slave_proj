@@ -155,11 +155,15 @@ class Slave  extends CI_Controller {
 
 	public function raise(){
 		$id = get_cookie("slave_game_user_id");
-		$owner = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\';')->row()->owner_id;
+        $owner_data = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\';')->row();
+		$owner = $owner_data->owner_id;
+        $owner_asset = $owner->asset;
+        if($owner_asset == < 1){
+            echo "就你一个犯人，并不能造反";
+            return;
+        }
 		$query = $this->db->query('select flag, fighter, launcher from threat where state = 1 and owner_id = \''.$owner.'\';');
 		$result = $query->result();
-        echo $result;
-        return;
 		if($result == []){
 			$uuid = $this->uuid();
             $this->db->insert('threat', ['flag'=>$uuid, 'owner_id'=> $owner, 'launcher'=>$id]);
