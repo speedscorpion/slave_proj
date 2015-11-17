@@ -56,7 +56,7 @@ class Slave  extends CI_Controller {
     private function get_rid_of_threat($target){
         $query = $this->db->query('select flag from threat where state = 1 and owner_id = \''.$target.'\';');
         if($query->result() != [])
-            $this->db->query('update set state = 3 where flag = \''.$query->row()->flag.'\';');
+            $this->db->query('update threat set state = 3 where flag = \''.$query->row()->flag.'\';');
     }
 
 	public function capture($enemy)
