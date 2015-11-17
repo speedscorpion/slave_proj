@@ -91,6 +91,12 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">惨遭奴役</h1>
+        <hr>
+        <p align="right">
+            <button id="main">刷新</button>
+            <button id="share">分享</button>
+        </p>
+        
         <div class="declare-box">
             <p>我是<?php echo $user->nickname;?></p>
             <p>我是一个奴隶</p>
@@ -108,6 +114,14 @@
 	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+
+            $("#main").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
+            });
+            $("#share").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/User/show";
+            });
+
 			$("#raise").click(function(){
                 var state = <?php echo $user->state;?>;
                 if( state == 4 || state == 5){

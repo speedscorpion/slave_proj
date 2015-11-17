@@ -89,6 +89,12 @@
 <body>
     <div id="content">
     	<h1 id="page_title">广场</h1>
+
+    	<hr>
+        <p align="right">
+            <button id="main">刷新</button>
+            <button id="share">分享</button>
+        </p>
         <div class="declare-box">
             <p>听说你们有人想造反，到底是谁呢，我决定挑一个拷问一下</p>
         </div>
@@ -108,6 +114,13 @@
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+
+			$("#main").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
+            });
+            $("#share").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/User/show";
+            });
 			$("#back_palace").click(function(){
 				location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
 			});

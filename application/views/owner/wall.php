@@ -111,6 +111,11 @@
 	<div id="content">
 		<h1 id="page_title">战争结果</h1>
 
+        <hr>
+        <p align="right">
+            <button id="main">刷新</button>
+            <button id="share">分享</button>
+        </p>
         <div class="result-box">
             <p>经过艰苦卓绝的战斗</p>
             <?php 
@@ -138,6 +143,13 @@
 	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+
+            $("#main").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
+            });
+            $("#share").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/User/show";
+            });
 			$("#accept").click(function(){
 				location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
 			});

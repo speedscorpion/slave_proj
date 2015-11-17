@@ -91,6 +91,11 @@
 <body>
 	<div id="content">
 		<h1 id="page_title">天牢</h1>
+        <hr>
+        <p align="right">
+            <button id="main">刷新</button>
+            <button id="share">分享</button>
+        </p>
         <div class="declare-box">
             <p>造反被抓了，我再也不敢了，我知道错了。放我出去，主人</p>
         </div>
@@ -99,6 +104,12 @@
 	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+            $("#main").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/Player/enter";
+            });
+            $("#share").click(function(){
+                location.href="http://www.hereprovides.com/slave/index.php/User/show";
+            });
 			$("#beg").click(function(){
 				alert("然而无情的奴隶主没有理会我的哀求");
 			});
