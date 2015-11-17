@@ -96,7 +96,7 @@
         </p>
 
         <div class="declare-box">
-            <p>看，这里是朕的江山</p>
+            <p>这里是的<?php echo urldecode($user->nickname);?>的宫殿</p>
             <p>下一步去做点什么呢</p>
         </div>
 	    <div class="action-zoom">

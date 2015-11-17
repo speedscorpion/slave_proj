@@ -90,7 +90,7 @@
 </head>
 <body>
 	<div id="content">
-		<h1 id="page_title">惨遭<?php echo $owner;?>奴役</h1>
+		<h1 id="page_title">惨遭<?php echo urldecode($owner);?>奴役</h1>
         <hr>
         <p align="right">
             <button id="main">刷新</button>
@@ -98,7 +98,7 @@
         </p>
         
         <div class="declare-box">
-            <p>我是<?php echo $user->nickname;?></p>
+            <p>我是<?php echo urldecode($user->nickname);?></p>
             <p>我是一个奴隶</p>
             <p>我每天受着非人的待遇</p>
             <p>总有一天我要把这个暴君推翻</p>
