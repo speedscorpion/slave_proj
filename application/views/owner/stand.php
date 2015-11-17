@@ -120,7 +120,9 @@
 					success: function(data){
 						if(data == 'invalid'){
 							alert('寡人还需要反省，不能随便怀疑别人');
-						}else if (data == 'success') {
+						}else if (data == 'leader'){
+							alert('got your boss');
+						}else if(data == 'follower') {
 							alert('想造反，活得不耐烦了');
 							//这里把奴隶列表里面刚被怀疑的人删掉
 						}else if(data == 'fail'){

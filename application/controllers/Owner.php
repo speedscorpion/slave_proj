@@ -22,7 +22,7 @@ class Owner  extends CI_Controller {
             $this->db->where('id', $id);
             if($state == 7)
                 $this->db->update('user', ['state'=>2, 'cool'=>0]);
-            else
+            if($state == 6) 
                 $this->db->update('user', ['state'=>3, 'cool'=>0]);
             return false;
         }else{
@@ -32,16 +32,18 @@ class Owner  extends CI_Controller {
 
 	public function suspect($target){
 		$id = get_cookie("slave_game_user_id");
-		if($this->still_cool($id))
+		if($this->still_cool($id)){
 			echo 'invalid';
+			return;
+		}
 		$query = $this->db->get_where('user', ['id'=>$target]);
 		$state = $query->row()->state;
 		if($state == 4){
 			$this->eliminate($target, $id);
-			echo "success";
+			echo "follower";
 		}else if($state == 5){
 			$this->break_up($id, $target);
-			echo "success";
+			echo "leader";
 		}else{
 			$this->db->where('id', $id);
 			$this->db->update('user', ['state'=>7, 'cool'=>time()]);

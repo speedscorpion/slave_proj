@@ -89,7 +89,7 @@ class Player extends CI_Controller {
             $this->db->where('id', $id);
             if($state == 7)
                 $this->db->update('user', ['state'=>2, 'cool'=>0]);
-            else
+            if($state == 6)
                 $this->db->update('user', ['state'=>3, 'cool'=>0]);
             return false;
         }else{
