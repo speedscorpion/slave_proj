@@ -48,7 +48,7 @@ class Player extends CI_Controller {
         $this->load->view("owner/palace", ['user'=>$data]);
     }
 
-    private get_current_owner($id){
+    private function get_current_owner($id){
         $owner_id = $this->db->query('select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row()->owner_id;
         return $this->db->query('select nickname from user where id = \''.$owner_id.'\';')->nickname;
     }
