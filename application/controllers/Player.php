@@ -45,7 +45,7 @@ class Player extends CI_Controller {
                 $this->db->update('user', $data);
             }
         }
-        $this->load->view("owner/palace", []);
+        $this->load->view("owner/palace", ['user'=>$data]);
     }
 
     public function enter()
@@ -67,15 +67,15 @@ class Player extends CI_Controller {
             case 3:
             case 4:
             case 5:
-                $current_boss = $this->db->query('select nickname from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
-                $this->load->view("slave/square", ['user'=>$data, 'owner'=>$current_boss->nickname]);
+                //$current_boss = $this->db->query('select nickname from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
+                $this->load->view("slave/square", ['user'=>$data]);
                 break;
             case 6:
                 if($this->still_cool($id))
                     $this->load->view("slave/jail", ['user'=> $data]);
                 else{
-                    $current_boss = $this->db->query('select nickname from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
-                    $this->load->view("slave/square", ['user'=> $data, 'owner'=>$current_boss->nickname]);
+                    //$current_boss = $this->db->query('select nickname from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
+                    $this->load->view("slave/square", ['user'=> $data]);
                 }
                 break;
             default:

@@ -115,7 +115,7 @@
 </head>
 <body>
 <div id="content">
-    <h1 id="page_title"><?php echo $user->nickname. " " ?>游戏成就</h1>
+    <h1 id="page_title"><?php echo urldecode($user->nickname). " " ?>游戏成就</h1>
 	<div class="declare-box">
 	    <div class="data-line">
 	    	<label class="data-label">朕的奴隶</label>
@@ -138,7 +138,7 @@
 	    	<p class="data-p">
 	    	<?php
 			foreach ($slave_record as $item) {
-				$tag = "<a href='http://www.hereprovides.com/slave/index.php/User/state/".$item->id."'>".$item->nickname."</a><br/>";
+				$tag = "<a href='http://www.hereprovides.com/slave/index.php/User/state/".$item->id."'>".urldecode($item->nickname)."</a><br/>";
 				echo $tag;
 			}
 		    ?>

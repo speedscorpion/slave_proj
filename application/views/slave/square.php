@@ -90,7 +90,7 @@
 </head>
 <body>
 	<div id="content">
-		<h1 id="page_title">惨遭<?php echo urldecode($owner);?>奴役</h1>
+		<h1 id="page_title">惨遭奴役</h1>
         <hr>
         <p align="right">
             <button id="main">刷新</button>
