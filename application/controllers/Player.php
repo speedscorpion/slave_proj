@@ -67,7 +67,8 @@ class Player extends CI_Controller {
             case 3:
             case 4:
             case 5:
-                $this->load->view("slave/square", ['user'=>$data]);
+                $current_boss = $this->db->query('select nickname from user where id = (select owner_id from slave where state = 1 and slave_id = \''.$id.'\');')->row();
+                $this->load->view("slave/square", ['user'=>$data, 'owner'=>$current_boss->nickname]);
                 break;
             case 6:
                 if($this->still_cool($id))

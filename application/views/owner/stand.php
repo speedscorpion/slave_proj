@@ -134,7 +134,7 @@
 						if(data == 'invalid'){
 							alert('寡人还需要反省，不能随便怀疑别人');
 						}else if (data == 'leader'){
-							alert('got your boss');
+							alert('抓到造反的头头了，我真是英明');
 						}else if(data == 'follower') {
 							alert('想造反，活得不耐烦了');
 							//这里把奴隶列表里面刚被怀疑的人删掉
