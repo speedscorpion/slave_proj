@@ -109,8 +109,8 @@ class Slave  extends CI_Controller {
             $this->db->where_in('id', $this->get_slave_relation($result));
             $this->db->update('slave', ['state'=>2]);
         }
-        
-        $this->load->view('owner/palace', []);
+        $user_data = $this->db->get_where('user', ['id'=>$id])->row();
+        $this->load->view('owner/palace', ['user'=>$user_data]);
     }
 
 
@@ -144,8 +144,8 @@ class Slave  extends CI_Controller {
             $this->db->where_in('id', $this->get_slaves($result));
             $this->db->update('user', ['state'=>1]);
         }
-        
-    	$this->load->view('owner/palace', []);
+        $user_data = $this->db->get_where('user', ['id'=>$id])->row();
+    	$this->load->view('owner/palace', ['user'=>$user_data]);
     }
 
 
